@@ -7,8 +7,11 @@
 The basic principals I followed for the layers was what immediately thought of,
 
 `F` -> keypad layer. (KP)
+
 `D` -> matching pair layer, and arrows. (MP)
+
 `S` -> symbol layer. (SYM)
+
 `A` -> TBD.
 
 > [!NOTE]
@@ -33,8 +36,11 @@ vim on an hourly basis at work. I always wanted `CTL` and `ALT` to be extremely
 accessible so I can use `hjkl` to move around my visual space. 
 
 `V, M` -> `CTL` (vim windows)
+
 `C, <` -> `ALT` (TWM windows)
-`X, >` -> `SFT`
+
+`X, >` -> `SFT` (Avoid pinky)
+
 `Z, ?` -> `WIN`
 
 With this, I have successfully removed the modifier keys from my pinky, which
