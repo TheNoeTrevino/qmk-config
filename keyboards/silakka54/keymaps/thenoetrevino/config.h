@@ -1,11 +1,13 @@
+// tapping
+#define QUICK_TAP_TERM 120
 #define TAPPING_TERM 200
-#define QUICK_TAP_TERM 100
+#define RETRO_TAPPING
 
-#define HOLD_ON_OTHER_KEY_PRESS
+// hold
+#define PERMISSIVE_HOLD
 #define CHORDAL_HOLD
-#define FLOW_TAP_TERM 105
 
-// need to mouse to moove a little slower when we tao it.
+// need to mouse to moove a little slower when we tap it.
 #define MOUSEKEY_MAX_SPEED 8
 #define MOUSEKEY_DELAY 8
 #define MOUSEKEY_TIME_TO_MAX 20
