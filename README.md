@@ -27,7 +27,7 @@ just use what I know?"
 
 Of course, some symbols were still missing. I added underscore, tilde, and
 backtick to the pinky column. Backtick was placed on the homerow as it is an
-incredibly underatted mapping in vim.
+incredibly underrated mapping in vim.
 
 ### Modifier keys
 
@@ -39,9 +39,7 @@ accessible so I can use `hjkl` to move around my visual space.
 
 `C, <` -> `ALT` (TWM windows)
 
-`X, >` -> `SFT` (Avoid pinky)
-
-`Z, ?` -> `WIN`
+`X, >` -> `WIN`
 
 With this, I have successfully removed the modifier keys from my pinky, which
 has been causing me pinky pain for a while now. 
@@ -103,44 +101,66 @@ Add this to your config.h, we will explain what they do later
 
 ``` c                           
                                 
-#define HOLD_ON_OTHER_KEY_PRESS
-
-#define FLOW_TAP_TERM 125
+#define PERMISSIVE_HOLD
+#define RETRO_TAPPING
+#define TAPPING_TERM 200
 ```
 
-#### HOLD_ON_OTHER_KEY_PRESS
+
+#### Permissive Hold
+
+This let us activate a layer and use it instantly. It just requires a slight
+change of thinking. It is quite hard to explain, but I think of layers as a long
+beep in my head. In the duration of that beep, I can use my layer as a please.
+When I want to go back to my default layer, I let it go. This illustration should
+be more clear: 
+
+                         TAPPING_TERM   
+  +---------------------------|--------+
+  | +----------------------+  |        |
+  | | LT(2, KC_A)          |  |        |
+  | +----------------------+  |        |
+  |    +--------------+       |        |
+  |    | KC_L         |       |        |
+  |    +--------------+       |        |
+  +---------------------------|--------+
+
+Despite us doing this before the tapping term ends, we still get the modified
+key. Note that it will not work if you do this: 
+
+                         TAPPING_TERM   
+  +---------------------------|--------+
+  | +-------------+           |        |
+  | | LT(2, KC_A) |           |        |
+  | +-------------+           |        |
+  |       +--------------+    |        |
+  |       | KC_L         |    |        |
+  |       +--------------+    |        |
+  +---------------------------|--------+
+
+In my experience, the above might look like what you want. After you try it, you
+might realize that the misfires are border line unbearable. If it is what you
+want, you should look into `HOLD_ON_OTHER_KEY_PRESS`.
 
 
-When using layers the process goes:
-1. Hold layer key
-2. Press desired key
-3. Let go of desired key
-4. Release layer key
+#### Retro Tapping
 
-When I type fast though, I get a lot of issues where I do this instead: 
-1. Hold layer key
-2. Press desired key
-3. Release layer key
-4. Let go of desired key
+This one is pretty simple. When you hold a key, for example: `LT(4, KC_1)`, for an
+entire second and do not have another input, the number 1 will then be sent to
+the computer. This is just something that I like.
 
-Because I think 'I got the key I wanted, lets move on.' 
+#### Quick Tap Term
 
-Here is a more visual representation of that
-
-
-| Time | Physical Key | Default  | PERMISSIVE_HOLD | HOLD_ON_OTHER_KEY_PRESS |
-| --------------- | --------------- | --------------- | --------------- | --------------- |
-| 0    | `LSFT_T(KC_A)` down |    |   |  |
-| 110  | `KC_B` down       |    |     | B |
-| 130  | `LSFT_T(KC_A)` up | ab | ab | B |
-| 140  | `KC_B` up | ab | ab | B |
+When you quickly tap a key twice and hold it, it will now repeat. This is great
+for keys like backspace. It is in a prime position (in this keyboard), but you
+also want to be able to spam it instead of just holding it for other behavior.
+With this you can do both. Just double tap, then hold, to repeat the input. Also
+good for something like enter. I only use this for delete, and plan to
+experiment with this more in the future.
 
 
-#### FLOW_TAP_TERM
 
-This is QMK's closest equivalent to ZMK's `required-time-idle`. It requires the user to
-stop for a bit before using the homerow mod key as its hold property. This
-allows us to type as we usually do, only having a slight hiccup when a layer
-switch is wanted. This means we can just type normally most of the time. More
-research needs to be done here.
+## Things I want to experiment with
 
+Using quicktap term to make things like `tap`, `enter`, `backspace` modifier
+keys. Especially consider making two of the thumb keys shift.
